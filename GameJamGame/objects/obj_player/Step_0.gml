@@ -1,2 +1,3 @@
 idle()
 move()
+shoot()

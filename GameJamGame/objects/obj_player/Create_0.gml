@@ -7,7 +7,13 @@ move_speed = 2;
 hsp = 0;
 vsp = 0;
 
+aimdir = 0;
+
+shoot_timer = 0;
+shoot_cooldown = 14;
+
 collision_layer = layer_tilemap_get_id("tiles_collision");
+instance_layer = layer_tilemap_get_id("instances");
 #endregion
 
 // Handles sprite when idle
@@ -43,3 +49,37 @@ function move()
 		if (hsp != 0) image_xscale = sign(hsp);
 	}
 }
+
+// Handles shooting bullets
+function shoot() 
+{
+	// Aim where mouse is
+	aimdir = point_direction(x, y, mouse_x, mouse_y);
+	
+	// Shoot timer handling
+	if (shoot_timer > 0) shoot_timer--
+	
+	// Shoot
+	if mouse_check_button(mb_left) and shoot_timer == 0
+	{
+		// Reset timer to cooldown
+		shoot_timer = shoot_cooldown;
+		
+		// Create instance of obj_green_bullet and gives instance current mouse position as direction
+		var _green_bullet = instance_create_layer(x, y, "instances", obj_green_bullet);
+		with(_green_bullet) dir = other.aimdir;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
