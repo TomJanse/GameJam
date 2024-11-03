@@ -7,6 +7,8 @@ move_speed = 1.8;
 hsp = 0;
 vsp = 0;
 
+is_aiming_left = false
+
 shoot_timer = 0;
 shoot_cooldown = 29;
 
@@ -67,7 +69,8 @@ function move()
 function shoot() 
 {
 	// Aim where mouse is
-	aimdir = point_direction(x, y, mouse_x, mouse_y);
+	//TODO fix aim direction X origin.
+	aimdir = point_direction(x, y  - (sprite_height / 2), mouse_x, mouse_y);
 	
 	// Shoot timer handling
 	if (shoot_timer > 0) shoot_timer--
