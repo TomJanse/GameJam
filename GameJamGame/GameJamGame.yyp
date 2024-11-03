@@ -35,6 +35,7 @@
   },
   "name":"GameJamGame",
   "resources":[
+    {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"obj_damage_enemy","path":"objects/obj_damage_enemy/obj_damage_enemy.yy",},},
     {"id":{"name":"obj_damage_parent","path":"objects/obj_damage_parent/obj_damage_parent.yy",},},
     {"id":{"name":"obj_damage_player","path":"objects/obj_damage_player/obj_damage_player.yy",},},
