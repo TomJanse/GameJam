@@ -2,24 +2,39 @@
 fullscreen();
 
 #region Variables
-move_speed = 2;
+move_speed = 1.8;
 
 hsp = 0;
 vsp = 0;
 
-aimdir = 0;
-
 shoot_timer = 0;
-shoot_cooldown = 14;
+shoot_cooldown = 29;
 
 collision_layer = layer_tilemap_get_id("tiles_collision");
 instance_layer = layer_tilemap_get_id("instances");
+
+// Variables for scr_draw
+x_weapon_offset = 1;
+y_weapon_offset = 2;
+center_y_offset = 7;
+updown_offset = 5;
+
+// Variables for bullet and weapon length
+bullet = obj_green_bullet;
+weapon_length = sprite_get_bbox_right(spr_ray_gun) - sprite_get_xoffset(spr_ray_gun);
 #endregion
 
 // Handles sprite when idle
 function idle()
 {
-	if (hsp == 0 and vsp == 0) sprite_index = spr_player;
+	if hsp == 0 and vsp == 0
+	{
+		if (sprite_index == spr_player_left_walk) sprite_index = spr_player_left;
+		else if (sprite_index == spr_player_right_walk) sprite_index = spr_player_right;
+		else if (sprite_index == spr_player_front_walk) sprite_index = spr_player_front;
+		else if (sprite_index == spr_player_back_walk) sprite_index = spr_player_back;
+
+	}
 }
 
 // Handles horizontal and vertical movement and collision with tilemap layer "tiles_collision"
@@ -41,13 +56,11 @@ function move()
 	move_and_collide(0, vsp, collision_layer, 4, 0, 0, move_speed, move_speed);
 	
 	// Set walking sprite
-	if vsp != 0
-	{
-		sprite_index = spr_player_walk;
-		
-		// Only flip sprite if moving horizontally (for now)
-		if (hsp != 0) image_xscale = sign(hsp);
-	}
+	if (hsp < 0) sprite_index = spr_player_left_walk;
+	else if (hsp > 0) sprite_index = spr_player_right_walk;
+	else if (vsp > 0) sprite_index = spr_player_front_walk;
+	else if (vsp < 0) sprite_index = spr_player_back_walk;
+
 }
 
 // Handles shooting bullets
@@ -65,8 +78,18 @@ function shoot()
 		// Reset timer to cooldown
 		shoot_timer = shoot_cooldown;
 		
-		// Create instance of obj_green_bullet and gives instance current mouse position as direction
-		var _green_bullet = instance_create_layer(x, y, "instances", obj_green_bullet);
+		// Sprite offsets based on weapon length
+		var _x_offset = lengthdir_x(weapon_length, aimdir) 
+		var _y_offset = lengthdir_y(weapon_length, aimdir) - center_y_offset
+		
+		// Sprite offset edits based on facing direction
+		if sprite_index = spr_player_back or sprite_index = spr_player_back_walk 
+		or sprite_index = spr_player_front or sprite_index = spr_player_front_walk
+		if (aimdir > 90 and aimdir < 270) _x_offset += -updown_offset
+		else _x_offset += updown_offset
+		
+		// Create instance of obj_green_bullet
+		var _green_bullet = instance_create_layer(x + _x_offset, y + _y_offset, "instances", bullet);
 		with(_green_bullet) dir = other.aimdir;
 	}
 }

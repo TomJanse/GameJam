@@ -16,6 +16,7 @@ function take_damage()
 	}
 }
 
+// Handles enemy death
 function death()
 {
 	if (hp <= 0) instance_destroy();
