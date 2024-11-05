@@ -42,7 +42,10 @@
     {"id":{"name":"obj_enemy","path":"objects/obj_enemy/obj_enemy.yy",},},
     {"id":{"name":"obj_green_bullet","path":"objects/obj_green_bullet/obj_green_bullet.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"obj_room_system","path":"objects/obj_room_system/obj_room_system.yy",},},
+    {"id":{"name":"rm_basic","path":"rooms/rm_basic/rm_basic.yy",},},
+    {"id":{"name":"rm_empty","path":"rooms/rm_empty/rm_empty.yy",},},
+    {"id":{"name":"rm_floor","path":"rooms/rm_floor/rm_floor.yy",},},
     {"id":{"name":"scr_draw","path":"scripts/scr_draw/scr_draw.yy",},},
     {"id":{"name":"scr_qol","path":"scripts/scr_qol/scr_qol.yy",},},
     {"id":{"name":"spr_enemy","path":"sprites/spr_enemy/spr_enemy.yy",},},
@@ -62,7 +65,9 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"rm_floor","path":"rooms/rm_floor/rm_floor.yy",},},
+    {"roomId":{"name":"rm_basic","path":"rooms/rm_basic/rm_basic.yy",},},
+    {"roomId":{"name":"rm_empty","path":"rooms/rm_empty/rm_empty.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[
