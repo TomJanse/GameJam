@@ -10,7 +10,7 @@ vsp = 0;
 max_dist = 200;
 destroy = false;
 
-collision_layer = layer_tilemap_get_id("tiles_collision");
+collision_layer = layer_tilemap_get_id("Tiles_C");
 #endregion
 
 // Moves the bullet in direction dir

@@ -2,6 +2,7 @@
 //		that actual random values are generated.
 randomize()
 
+#region // Room generation variables
 // These variables exist to measure out the placement of rooms on the floor.
 //		The room cell in tiles assumes a room it can draw has 240 width and 160 height.
 //		The drawing of these rooms will not function if given a room size that doesn't
@@ -12,8 +13,26 @@ global.room_cell_height_in_tiles = 20
 var _room_cell_width = global.room_cell_width_in_tiles * global.tile_size
 var _room_cell_height = global.room_cell_height_in_tiles * global.tile_size
 
-var _generation_passes = 4
+// Calculate width and height in cells
+var _width = room_width div _room_cell_width //9
+var _height = room_height div _room_cell_height //9
 
+show_debug_message(_width)
+show_debug_message(_height)
+
+// Get the collision and decorative tilemaps
+var _tiles_map_collision = layer_tilemap_get_id("Tiles_C")
+var _tiles_map_decorative = layer_tilemap_get_id("Tiles_D")
+
+// Room generation places a continuous path of rooms every pass. The number of passes
+//		increases the potential complexity, but also the potential for clusters of rooms.
+//		The population percent (0-1) breaks generation off if more than the given percent
+//		rooms are already generated to limit floor size.
+var _generation_passes = 4
+var _max_population_percent = 0.1
+#endregion
+
+#region // Rooms
 global.spawn_tile_index = 1
 global.rooms = [
 	[rm_basic, false, false, false, true],
@@ -32,10 +51,13 @@ global.rooms = [
 	[rm_basic, true, true, true, false],
 	[rm_basic, true, true, true, true]
 ]
+#endregion
+#region // Enemy spawn groups
 global.enemy_spawn_groups = [
 	[obj_enemy, obj_enemy, obj_enemy],
 	[obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy],
 ]
+#endregion
 
 enum DIRECTION {
 	RIGHT,
@@ -43,13 +65,6 @@ enum DIRECTION {
 	LEFT,
 	DOWN
 }
-
-// Get the tile layer map id
-var _tiles_map = layer_tilemap_get_id("Tiles")
-
-// Calculate width and height in cells
-var _width = room_width div _room_cell_width //8
-var _height = room_height div _room_cell_height //8
 
 // Create floor blueprint
 //		The blueprint will contain an array of four booleans at each possible room location
@@ -68,22 +83,25 @@ for(var _i = 0; _i < _width; _i++) {
 	}
 }
 
-// Set start grid X and Y
-var _start_x = irandom(_width - 1)
-var _start_y = irandom(_height - 1)
-
-// Set exit grid X and Y
-var _end_x 
-var _end_y 
-do {
-    _end_x = irandom(_width - 1)
-	_end_y = irandom(_height - 1)
-} until (_end_x != _start_x || _end_y != _start_y)
+// Set X and Y of start room to center room
+var _start_x = 4
+var _start_y = 4
 
 var _room_count = 0
-var _target_x = _start_x
-var _target_y = _start_y
 for(var _i = 0; _i < _generation_passes; _i++) {
+	// Generate a new random end point and ensure that end point is a location 
+	//		on the blueprint that has not been visited.
+	var _position_connections = []
+	do {
+	    _end_x = irandom(_width - 1)
+	    _end_y = irandom(_height - 1)
+	    _position_connections = blueprint[# _end_x, _end_y]
+	} until (array_equals(_position_connections, [false, false, false, false]) && _end_x != _start_x && _end_y != _start_y)  
+	
+	
+	var _target_x = _start_x
+	var _target_y = _start_y
+	
 	// Pick random direction equating to the DIRECTION enum values (0 - 3)
 	//		(DIRECTION[X] notation is not supported)
 	var _direction = irandom(3)
@@ -141,46 +159,36 @@ for(var _i = 0; _i < _generation_passes; _i++) {
 	    }
 	}
 	
-	// Generate a new random start point for the next pass and ensure
-	//		that start point is a location on the blueprint that has
-	//		not been covered yet.
-	var _position_connections = []
-	do {
-	    _start_x = irandom(_width - 1)
-	    _start_y = irandom(_height - 1)
-	    _position_connections = blueprint[# _start_x, _start_y]
-	} until array_equals(_position_connections, [false, false, false, false])
-	
-	
-	// Generate a new random end point for the next pass and ensure
-	//		that end point is a location on the blueprint that has
-	//		been visited so the new pass is connected to the previous ones.
-	do {
-	    _end_x = irandom(_width - 1)
-	    _end_y = irandom(_height - 1)
-	    _position_connections = blueprint[# _end_x, _end_y]
-	} until !array_equals(_position_connections, [false, false, false, false])
-
-	// Set new target X and Y for the next pass
-	_target_x = _start_x
-	_target_y = _start_y
+	// End generation early if room amount is exeeding desired population percentage
+	if(_room_count > (_width * _height) / _max_population_percent) break
 }
 
-//var _room_grid = ds_grid_create(_width, _height)
+
+// Draw random rooms for each given location and connections
 for(var _i = 0; _i < _width; _i++) {
 	for(var _j = 0; _j < _height; _j++) {
 			var _start_tile_room_x = _i * global.room_cell_width_in_tiles
 			var _start_tile_room_y = _j * global.room_cell_height_in_tiles
 			var _current_room_connections = blueprint[# _i, _j]
 			
+			// Place random room
 			if(array_equals(_current_room_connections, [false, false, false, false])) {
 				// Empty room
 			} else {
 				var _room = get_random_room_based_on_connections(_current_room_connections)
-				place_room(_tiles_map, _room, _start_tile_room_x, _start_tile_room_y)
+				place_room(_tiles_map_collision, _tiles_map_decorative, _room, _start_tile_room_x, _start_tile_room_y)
+			}
+			
+			// Place player in start room
+			if(_i == _start_x && _j == _start_y) {
+				var _start_room_center_x = (_start_tile_room_x + (global.room_cell_width_in_tiles / 2)) * global.tile_size + global.tile_size / 2
+				var _start_room_center_y = (_start_tile_room_y + (global.room_cell_height_in_tiles / 2)) * global.tile_size + global.tile_size / 2
+				instance_create_layer(_start_room_center_x, _start_room_center_y, "Instances", obj_player)
 			}
 	}
 }
+
+
 
 
 

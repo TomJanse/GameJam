@@ -1,6 +1,3 @@
-// Move to camera object when making camera
-fullscreen();
-
 #region Variables
 move_speed = 1.8;
 
@@ -12,8 +9,8 @@ is_aiming_left = false
 shoot_timer = 0;
 shoot_cooldown = 29;
 
-collision_layer = layer_tilemap_get_id("tiles_collision");
-instance_layer = layer_tilemap_get_id("instances");
+collision_layer = layer_tilemap_get_id("Tiles_C");
+instance_layer = layer_tilemap_get_id("Instances");
 
 // Variables for scr_draw
 x_weapon_offset = 1;
