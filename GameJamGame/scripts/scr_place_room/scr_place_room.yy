@@ -1,9 +1,9 @@
 {
   "$GMScript":"v1",
-  "%Name":"scr_draw_room",
+  "%Name":"scr_place_room",
   "isCompatibility":false,
   "isDnD":false,
-  "name":"scr_draw_room",
+  "name":"scr_place_room",
   "parent":{
     "name":"Scripts",
     "path":"folders/Scripts.yy",

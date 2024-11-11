@@ -1,3 +1,4 @@
+/// @description
 // GameMaker random values are based on initial seed. This function randomizes seed so
 //		that actual random values are generated.
 randomize()
@@ -17,9 +18,6 @@ var _room_cell_height = global.room_cell_height_in_tiles * global.tile_size
 var _width = room_width div _room_cell_width //9
 var _height = room_height div _room_cell_height //9
 
-show_debug_message(_width)
-show_debug_message(_height)
-
 // Get the collision and decorative tilemaps
 var _tiles_map_collision = layer_tilemap_get_id("Tiles_C")
 var _tiles_map_decorative = layer_tilemap_get_id("Tiles_D")
@@ -33,6 +31,7 @@ var _max_population_percent = 0.1
 #endregion
 
 #region // Rooms
+global.current_room = {}
 global.spawn_tile_index = 1
 global.rooms = [
 	[rm_basic, false, false, false, true],
@@ -163,32 +162,60 @@ for(var _i = 0; _i < _generation_passes; _i++) {
 	if(_room_count > (_width * _height) / _max_population_percent) break
 }
 
+// Floor grid stores for all locations:
+//	- an array of coordinates of the four corners of the location;
+//	- an array of enemy data structs containing X and Y coordinates for each and enemy type object;
+//	- a bool storing if the room has been cleared;
+rooms = []
 
 // Draw random rooms for each given location and connections
 for(var _i = 0; _i < _width; _i++) {
 	for(var _j = 0; _j < _height; _j++) {
-			var _start_tile_room_x = _i * global.room_cell_width_in_tiles
-			var _start_tile_room_y = _j * global.room_cell_height_in_tiles
-			var _current_room_connections = blueprint[# _i, _j]
-			
-			// Place random room
-			if(array_equals(_current_room_connections, [false, false, false, false])) {
-				// Empty room
-			} else {
-				var _room = get_random_room_based_on_connections(_current_room_connections)
-				place_room(_tiles_map_collision, _tiles_map_decorative, _room, _start_tile_room_x, _start_tile_room_y)
-			}
-			
-			// Place player in start room
-			if(_i == _start_x && _j == _start_y) {
-				var _start_room_center_x = (_start_tile_room_x + (global.room_cell_width_in_tiles / 2)) * global.tile_size + global.tile_size / 2
-				var _start_room_center_y = (_start_tile_room_y + (global.room_cell_height_in_tiles / 2)) * global.tile_size + global.tile_size / 2
-				instance_create_layer(_start_room_center_x, _start_room_center_y, "Instances", obj_player)
-			}
+		// Skip locations that have no connections
+		var _current_room_connections = blueprint[# _i, _j]
+		if(array_equals(_current_room_connections, [false, false, false, false])) continue
+		
+		var _start_tile_room_x = _i * global.room_cell_width_in_tiles
+		var _start_tile_room_y = _j * global.room_cell_height_in_tiles
+				
+		// Place random room	
+		var _room = get_random_room_based_on_connections(_current_room_connections)
+		var _enemies = place_room(_tiles_map_collision, _tiles_map_decorative, _room, _start_tile_room_x, _start_tile_room_y)
+		
+		// Calculate bounds
+		var _bound_x_left = _start_tile_room_x * global.tile_size
+		var _bound_y_top = _start_tile_room_y * global.tile_size
+		var _bound_x_right = _bound_x_left + (global.room_cell_width_in_tiles * global.tile_size)
+		var _bound_y_bottom = _bound_y_top + (global.room_cell_height_in_tiles * global.tile_size)
+		
+		// Create and store room data
+		var _room_data = { 
+			enemies: _enemies,
+			bounds: [_bound_x_left, _bound_y_top, _bound_x_right, _bound_y_bottom],
+			cleared: false
+		}
+		array_push(rooms, _room_data) 
+				
+		// Place player in start room
+		if(_i == _start_x && _j == _start_y) {
+			var _start_room_center_x = (_start_tile_room_x + (global.room_cell_width_in_tiles / 2)) * global.tile_size + global.tile_size / 2
+			var _start_room_center_y = (_start_tile_room_y + (global.room_cell_height_in_tiles / 2)) * global.tile_size + global.tile_size / 2
+			instance_create_layer(_start_room_center_x, _start_room_center_y, "Instances", obj_player)
+		}
 	}
 }
 
-
-
-
-
+/// @description	Tracks which room the player is in and makes the data of that room globally accessable.
+/// @throws			Throws a runtime exception when player is not inside any of the stored rooms.
+function globalize_current_room() {
+	var _player = instance_find(obj_player, 0)
+	for(var _i = 0; _i < array_length(rooms); _i++) {
+		var _bounds = rooms[_i].bounds
+		if(point_in_rectangle(_player.x, _player.y, _bounds[0], _bounds[1], _bounds[2], _bounds[3])) {
+			global.current_room = rooms[_i]
+			return
+		}
+	}
+	
+	throw ("Player out of expected bounds")
+}

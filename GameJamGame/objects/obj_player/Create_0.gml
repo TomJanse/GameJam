@@ -89,7 +89,7 @@ function shoot()
 		else _x_offset += updown_offset
 		
 		// Create instance of obj_green_bullet
-		var _green_bullet = instance_create_layer(x + _x_offset, y + _y_offset, "instances", bullet);
+		var _green_bullet = instance_create_layer(x + _x_offset, y + _y_offset, "Instances", bullet);
 		with(_green_bullet) dir = other.aimdir;
 	}
 }
