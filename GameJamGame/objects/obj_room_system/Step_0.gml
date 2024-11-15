@@ -1,1 +1,1 @@
-globalize_current_room()
+update_current_room()

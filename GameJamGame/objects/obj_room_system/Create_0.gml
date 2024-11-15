@@ -19,8 +19,8 @@ var _width = room_width div _room_cell_width //9
 var _height = room_height div _room_cell_height //9
 
 // Get the collision and decorative tilemaps
-var _tiles_map_collision = layer_tilemap_get_id("Tiles_C")
-var _tiles_map_decorative = layer_tilemap_get_id("Tiles_D")
+global.tiles_map_collision = layer_tilemap_get_id("Tiles_C")
+global.tiles_map_decorative = layer_tilemap_get_id("Tiles_D")
 
 // Room generation places a continuous path of rooms every pass. The number of passes
 //		increases the potential complexity, but also the potential for clusters of rooms.
@@ -28,11 +28,23 @@ var _tiles_map_decorative = layer_tilemap_get_id("Tiles_D")
 //		rooms are already generated to limit floor size.
 var _generation_passes = 4
 var _max_population_percent = 0.1
+
+enum DIRECTION {
+	RIGHT,
+	UP,
+	LEFT,
+	DOWN
+}
 #endregion
 
 #region // Rooms
-global.current_room = {}
+global.current_room = -1
+// TODO: Change tile indexes to correct values when tile map is complete
 global.spawn_tile_index = 1
+global.door_left_tile_index = 2
+global.door_right_tile_index = 2
+global.door_up_tile_index = 2
+global.door_down_tile_index = 2
 global.rooms = [
 	[rm_basic, false, false, false, true],
 	[rm_basic, false, false, true, false],
@@ -51,6 +63,7 @@ global.rooms = [
 	[rm_basic, true, true, true, true]
 ]
 #endregion
+
 #region // Enemy spawn groups
 global.enemy_spawn_groups = [
 	[obj_enemy, obj_enemy, obj_enemy],
@@ -58,12 +71,7 @@ global.enemy_spawn_groups = [
 ]
 #endregion
 
-enum DIRECTION {
-	RIGHT,
-	UP,
-	LEFT,
-	DOWN
-}
+#region // Generate floor
 
 // Create floor blueprint
 //		The blueprint will contain an array of four booleans at each possible room location
@@ -165,6 +173,7 @@ for(var _i = 0; _i < _generation_passes; _i++) {
 // Floor grid stores for all locations:
 //	- an array of coordinates of the four corners of the location;
 //	- an array of enemy data structs containing X and Y coordinates for each and enemy type object;
+//	- an array of door tile data arrays containing tile X and Y coordinates and tile index;
 //	- a bool storing if the room has been cleared;
 rooms = []
 
@@ -180,42 +189,122 @@ for(var _i = 0; _i < _width; _i++) {
 				
 		// Place random room	
 		var _room = get_random_room_based_on_connections(_current_room_connections)
-		var _enemies = place_room(_tiles_map_collision, _tiles_map_decorative, _room, _start_tile_room_x, _start_tile_room_y)
+		var _room_data = place_room(_room, _start_tile_room_x, _start_tile_room_y)
 		
-		// Calculate bounds
+		// Calculate inner bounds of the room (excluding wall and door tiles)
 		var _bound_x_left = _start_tile_room_x * global.tile_size
 		var _bound_y_top = _start_tile_room_y * global.tile_size
-		var _bound_x_right = _bound_x_left + (global.room_cell_width_in_tiles * global.tile_size)
-		var _bound_y_bottom = _bound_y_top + (global.room_cell_height_in_tiles * global.tile_size)
+		var _bound_x_right = (_start_tile_room_x + global.room_cell_width_in_tiles) * global.tile_size
+		var _bound_y_bottom = (_start_tile_room_y + global.room_cell_height_in_tiles) * global.tile_size
 		
 		// Create and store room data
-		var _room_data = { 
-			enemies: _enemies,
+		array_push(rooms, { 
+			enemies: _room_data.enemies,
 			bounds: [_bound_x_left, _bound_y_top, _bound_x_right, _bound_y_bottom],
+			door_tiles: _room_data.door_tiles,
 			cleared: false
-		}
-		array_push(rooms, _room_data) 
+		}) 
 				
 		// Place player in start room
 		if(_i == _start_x && _j == _start_y) {
 			var _start_room_center_x = (_start_tile_room_x + (global.room_cell_width_in_tiles / 2)) * global.tile_size + global.tile_size / 2
 			var _start_room_center_y = (_start_tile_room_y + (global.room_cell_height_in_tiles / 2)) * global.tile_size + global.tile_size / 2
-			instance_create_layer(_start_room_center_x, _start_room_center_y, "Instances", obj_player)
+			instance_create_layer(_start_room_center_x, _start_room_center_y, "Player", obj_player)
 		}
 	}
 }
 
-/// @description	Tracks which room the player is in and makes the data of that room globally accessable.
-/// @throws			Throws a runtime exception when player is not inside any of the stored rooms.
-function globalize_current_room() {
-	var _player = instance_find(obj_player, 0)
+#endregion
+
+/// @description	Checks if any enemy in the listed enemies of a room still exists.
+function is_cleared(_room_data) {
+	if(_room_data == -1) return false
+	var _enemies = _room_data.enemies
+
+	for(var _j = 0; _j < array_length(_enemies); _j++) {
+		if(instance_exists(_enemies[_j].enemy)) return false
+	}
+	return true
+}
+
+/// @description					Check which room the player is in by comparing its position to the room bounds.
+/// @param	{Id.Instance} _player	The player instance to use for checking.	
+/// @throws							Player outside of expected bounds error.
+function get_current_room(_player) {
 	for(var _i = 0; _i < array_length(rooms); _i++) {
 		var _bounds = rooms[_i].bounds
 		if(point_in_rectangle(_player.x, _player.y, _bounds[0], _bounds[1], _bounds[2], _bounds[3])) {
-			global.current_room = rooms[_i]
-			return
+			return rooms[_i]
 		}
 	}
 	
-	throw ("Player out of expected bounds")
+	throw "Player outside of expected bounds!"
+}
+
+/// @description							Push the player into a new room by altering their X or Y based on the previous room.
+/// @param	{Id.Instance} _player			The player instance to move.
+/// @param	{Array<Real>} _previous_bounds	The bounds of the previous room to compare against.
+function push_player_into_room(_player, _previous_bounds) {
+		// Multiplications are to account for the player's height as they are 2 tiles tall
+		//		and their Y coordinate is settled at the bottom of the sprite.
+		if (_player.x <= _previous_bounds[0]) _player.x -= global.tile_size * 2 // Entered from the right	
+		else if (_player.x >= _previous_bounds[2]) _player.x += global.tile_size * 2 // Entered from the left
+		else if (_player.y <= _previous_bounds[1]) _player.y -= global.tile_size // Entered from the bottom
+		else  _player.y += global.tile_size * 3 // Entered from the top
+}
+
+/// @description					Open or close the doors of a given room.
+/// @param	{Struct} _room_data		The room data containing door tiles.
+/// @param	{Bool} _open			Whether to open (true) or close (false) the doors.
+function change_door_state(_room_data, _open) {
+	for (var _i = 0; _i < array_length(_room_data.door_tiles); _i++) {
+		var _door = _room_data.door_tiles[_i];
+		
+		// If opening, clear collision and update decorative layer
+		if (_open) {
+			tilemap_set(global.tiles_map_collision, 0, _door[0], _door[1]);
+			tilemap_set(global.tiles_map_decorative, _door[2], _door[0], _door[1]);
+		} 
+		// If closing, update collision and clear decorative layer
+		else {
+			tilemap_set(global.tiles_map_collision, _door[2], _door[0], _door[1]);
+			tilemap_set(global.tiles_map_decorative, 0, _door[0], _door[1]);
+		}
+	}
+}
+
+
+/// @description	Tracks which room the player is in and updates the rooms.
+/// @throws			Throws a runtime exception when player is not inside any of the stored rooms.
+function update_current_room() {
+	// Update room cleared status
+	if(is_cleared(global.current_room) && global.current_room.cleared == false) {
+		global.current_room.cleared = true
+		
+		// Open doors
+		change_door_state(global.current_room, true)
+	}
+	
+	// Update current room status
+	var _player = instance_find(obj_player, 0)
+	var _room_data = get_current_room(_player)
+	if(_room_data != global.current_room) {
+		// Clear all entities
+		layer_destroy_instances("Entities")
+				
+		// If room not cleared yet, place enemies, close the doors, and push player
+		//		into room to avoid collision with closing doors.
+		if(!_room_data.cleared) { 
+			spawn_enemies(_room_data.enemies)
+			
+			// Push player into the new room
+			if(global.current_room != -1) push_player_into_room(_player, global.current_room.bounds)
+			
+			// Close doors
+			change_door_state(_room_data, false)
+		}
+		
+		// Update current room
+		global.current_room = _room_data
+	}
 }

@@ -10,7 +10,7 @@ shoot_timer = 0;
 shoot_cooldown = 29;
 
 collision_layer = layer_tilemap_get_id("Tiles_C");
-instance_layer = layer_tilemap_get_id("Instances");
+instance_layer = layer_tilemap_get_id("Player");
 
 // Variables for scr_draw
 x_weapon_offset = 1;
@@ -89,7 +89,7 @@ function shoot()
 		else _x_offset += updown_offset
 		
 		// Create instance of obj_green_bullet
-		var _green_bullet = instance_create_layer(x + _x_offset, y + _y_offset, "Instances", bullet);
+		var _green_bullet = instance_create_layer(x + _x_offset, y + _y_offset, "Entities", bullet);
 		with(_green_bullet) dir = other.aimdir;
 	}
 }

@@ -35,7 +35,6 @@
   },
   "name":"GameJamGame",
   "resources":[
-    {"id":{"name":"obj_camera","path":"objects/obj_camera/obj_camera.yy",},},
     {"id":{"name":"obj_damage_enemy","path":"objects/obj_damage_enemy/obj_damage_enemy.yy",},},
     {"id":{"name":"obj_damage_parent","path":"objects/obj_damage_parent/obj_damage_parent.yy",},},
     {"id":{"name":"obj_damage_player","path":"objects/obj_damage_player/obj_damage_player.yy",},},
@@ -51,6 +50,7 @@
     {"id":{"name":"scr_place_room","path":"scripts/scr_place_room/scr_place_room.yy",},},
     {"id":{"name":"scr_qol","path":"scripts/scr_qol/scr_qol.yy",},},
     {"id":{"name":"scr_random_room","path":"scripts/scr_random_room/scr_random_room.yy",},},
+    {"id":{"name":"scr_spawn_enemies","path":"scripts/scr_spawn_enemies/scr_spawn_enemies.yy",},},
     {"id":{"name":"spr_enemy","path":"sprites/spr_enemy/spr_enemy.yy",},},
     {"id":{"name":"spr_green_bullet","path":"sprites/spr_green_bullet/spr_green_bullet.yy",},},
     {"id":{"name":"spr_player_back_walk","path":"sprites/spr_player_back_walk/spr_player_back_walk.yy",},},
