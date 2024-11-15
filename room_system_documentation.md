@@ -25,7 +25,11 @@ Each room must define its connections using the following boolean array format:
 ```gml
   [RIGHT, UP, LEFT, DOWN]
 ```
-- Example: [false, true, true, false] indicates a room with doors on the left and top walls.
+- Example: [false, true, true, false] indicates a room with doors on the left and top walls.  
+
+- A room must have its doors on the edge of the relevant side, not somewhere in the middle.
+- Every door must be 2 tiles wide.
+- A door must be in the middle of the relevant side, not somewhere up or down in a corner.
 
 ### Tile Indexes
 
@@ -41,6 +45,9 @@ Rooms are defined in global.rooms as follows:
 ```
 - `Room Object`: Reference to the room asset (e.g., `rm_basic`).
 - Door booleans must match the connection array rules.
+
+### Instances
+Instances are not coppied over from predefined rooms. There is no use in adding them to your room. Only tiles are coppied. See chapter "Enemy spawing" for more info.
 
 ## Floor Generation Details
 
@@ -73,8 +80,10 @@ Doors automatically open or close based on room-cleared status:
 The `change_door_state` function handles this logic.
 
 ### Enemy Spawning
+Enemies are not coppied from the predefined rooms due to a limitation in reading instances in rooms. Instead the tiles with the same index as `global.spawn_tile_index` are used to spawn
+random groups of enemies that are predefined in `global.enemy_spawn_groups`.  
 
-Enemies are spawned in specified locations using the `spawn_enemies` function, which takes data from the room's `enemies` array.
+Enemies are spawned in the specified locations using the `spawn_enemies` function, which takes data from the room's `enemies` array.
 
 ## Best Practices
 
