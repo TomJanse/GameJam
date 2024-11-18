@@ -11,12 +11,12 @@ randomize()
 global.tile_size = 8
 global.room_cell_width_in_tiles = 30
 global.room_cell_height_in_tiles = 20
-var _room_cell_width = global.room_cell_width_in_tiles * global.tile_size
-var _room_cell_height = global.room_cell_height_in_tiles * global.tile_size
+room_cell_width = global.room_cell_width_in_tiles * global.tile_size
+room_cell_height = global.room_cell_height_in_tiles * global.tile_size
 
 // Calculate width and height in cells
-var _width = room_width div _room_cell_width //9
-var _height = room_height div _room_cell_height //9
+var _width = room_width div room_cell_width //9
+var _height = room_height div room_cell_height //9
 
 // Get the collision and decorative tilemaps
 global.tiles_map_collision = layer_tilemap_get_id("Tiles_C")
@@ -69,6 +69,11 @@ global.enemy_spawn_groups = [
 	[obj_enemy, obj_enemy, obj_enemy],
 	[obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy],
 ]
+#endregion
+
+#region // Initialize camera
+view_camera[0] = camera_create()
+camera_set_view_size(view_camera[0], room_cell_width, room_cell_height)
 #endregion
 
 #region // Generate floor
@@ -273,7 +278,6 @@ function change_door_state(_room_data, _open) {
 	}
 }
 
-
 /// @description	Tracks which room the player is in and updates the rooms.
 /// @throws			Throws a runtime exception when player is not inside any of the stored rooms.
 function update_current_room() {
@@ -289,6 +293,10 @@ function update_current_room() {
 	var _player = instance_find(obj_player, 0)
 	var _room_data = get_current_room(_player)
 	if(_room_data != global.current_room) {
+		// Relocate the camera to the next room
+		var _bounds = _room_data.bounds
+		camera_set_view_pos(view_camera[0],_bounds[0], _bounds[1])
+		
 		// Clear all entities
 		layer_destroy_instances("Entities")
 				
