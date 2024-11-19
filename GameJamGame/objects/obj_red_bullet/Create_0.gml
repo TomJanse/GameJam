@@ -2,7 +2,7 @@ event_inherited();
 
 #region Variables
 dir = 0;
-spd = 2.5;
+spd = 1.5;
 
 hsp = 0;
 vsp = 0;
