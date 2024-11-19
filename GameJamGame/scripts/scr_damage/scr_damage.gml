@@ -53,10 +53,10 @@
 	
 			// Loop through list of hits and apply damage
 			var _hit_confirm = false;
-			for(var i = 0; i < _list_size; i++)
+			for(var _i = 0; _i < _list_size; _i++)
 			{
 				// Get instance from list
-				var _inst = ds_list_find_value(_inst_list, i);
+				var _inst = ds_list_find_value(_inst_list, _i);
 			
 				// Check if instance is already in damage list (check if bullet has already damaged enemy)
 				// If invincibility frames are used, this is not necessary
@@ -86,14 +86,14 @@
 		if _iframes == false
 		{
 			var _damage_list_size = ds_list_size(damage_list);
-			for(var i = 0; i < _damage_list_size; i++)
+			for(var _i = 0; _i < _damage_list_size; _i++)
 			{
 				// If not touching the damage instance anymore, remove it from the list and set loop back 1 position
-				var _inst = ds_list_find_value(damage_list, i);
+				var _inst = ds_list_find_value(damage_list, _i);
 				if !instance_exists(_inst) or !place_meeting (x, y, _inst)
 				{
-					ds_list_delete(damage_list, i);
-					i--;
+					ds_list_delete(damage_list, _i);
+					_i--;
 					_damage_list_size--;
 				}
 			}

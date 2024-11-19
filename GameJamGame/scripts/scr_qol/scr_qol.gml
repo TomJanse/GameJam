@@ -26,7 +26,7 @@ function distance_to_player(_entity, _player)
 }
 function direction_of_player(_entity, _player)
 {
-    if (_player != noone) target = _player
+    if (_player != noone && _entity != noone) target = _player
 	else return 0
     return point_direction(_entity.x, _entity.y, target.x, target.y)
 }

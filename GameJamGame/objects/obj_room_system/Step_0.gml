@@ -1,0 +1,1 @@
+update_current_room()
