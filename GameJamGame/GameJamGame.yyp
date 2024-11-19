@@ -45,11 +45,15 @@
     {"id":{"name":"obj_green_bullet","path":"objects/obj_green_bullet/obj_green_bullet.yy",},},
     {"id":{"name":"obj_guard_dog","path":"objects/obj_guard_dog/obj_guard_dog.yy",},},
     {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},},
-    {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"id":{"name":"obj_room_system","path":"objects/obj_room_system/obj_room_system.yy",},},
+    {"id":{"name":"rm_basic","path":"rooms/rm_basic/rm_basic.yy",},},
+    {"id":{"name":"rm_empty","path":"rooms/rm_empty/rm_empty.yy",},},
+    {"id":{"name":"rm_floor","path":"rooms/rm_floor/rm_floor.yy",},},
+    {"id":{"name":"scr_coin_flip","path":"scripts/scr_coin_flip/scr_coin_flip.yy",},},
     {"id":{"name":"scr_damage","path":"scripts/scr_damage/scr_damage.yy",},},
     {"id":{"name":"scr_draw","path":"scripts/scr_draw/scr_draw.yy",},},
+    {"id":{"name":"scr_place_room","path":"scripts/scr_place_room/scr_place_room.yy",},},
     {"id":{"name":"scr_qol","path":"scripts/scr_qol/scr_qol.yy",},},
-<<<<<<< HEAD
     {"id":{"name":"spr_dog_back_bite","path":"sprites/spr_dog_back_bite/spr_dog_back_bite.yy",},},
     {"id":{"name":"spr_dog_back","path":"sprites/spr_dog_back/spr_dog_back.yy",},},
     {"id":{"name":"spr_dog_death","path":"sprites/spr_dog_death/spr_dog_death.yy",},},
@@ -58,7 +62,8 @@
     {"id":{"name":"spr_dog_idle","path":"sprites/spr_dog_idle/spr_dog_idle.yy",},},
     {"id":{"name":"spr_dog_side_bite","path":"sprites/spr_dog_side_bite/spr_dog_side_bite.yy",},},
     {"id":{"name":"spr_dog_side","path":"sprites/spr_dog_side/spr_dog_side.yy",},},
-=======
+    {"id":{"name":"scr_random_room","path":"scripts/scr_random_room/scr_random_room.yy",},},
+    {"id":{"name":"scr_spawn_enemies","path":"scripts/scr_spawn_enemies/scr_spawn_enemies.yy",},},
     {"id":{"name":"snd_bullet_destroy","path":"sounds/snd_bullet_destroy/snd_bullet_destroy.yy",},},
     {"id":{"name":"snd_disintegrate","path":"sounds/snd_disintegrate/snd_disintegrate.yy",},},
     {"id":{"name":"snd_head_bonk","path":"sounds/snd_head_bonk/snd_head_bonk.yy",},},
@@ -66,7 +71,6 @@
     {"id":{"name":"snd_taking_damage","path":"sounds/snd_taking_damage/snd_taking_damage.yy",},},
     {"id":{"name":"spr_damage_test","path":"sprites/spr_damage_test/spr_damage_test.yy",},},
     {"id":{"name":"spr_enemy_parent","path":"sprites/spr_enemy_parent/spr_enemy_parent.yy",},},
->>>>>>> 3b96d3e5339cebc78f9229da56b4a5ec543bf0a2
     {"id":{"name":"spr_enemy","path":"sprites/spr_enemy/spr_enemy.yy",},},
     {"id":{"name":"spr_green_bullet","path":"sprites/spr_green_bullet/spr_green_bullet.yy",},},
     {"id":{"name":"spr_player_back_walk","path":"sprites/spr_player_back_walk/spr_player_back_walk.yy",},},
@@ -86,7 +90,9 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
+    {"roomId":{"name":"rm_floor","path":"rooms/rm_floor/rm_floor.yy",},},
+    {"roomId":{"name":"rm_basic","path":"rooms/rm_basic/rm_basic.yy",},},
+    {"roomId":{"name":"rm_empty","path":"rooms/rm_empty/rm_empty.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

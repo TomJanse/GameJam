@@ -1,6 +1,3 @@
-// Move to camera object when making camera
-fullscreen();
-
 #region Variables
 state = "Alive"
 move_speed = 1.8;
@@ -8,11 +5,13 @@ move_speed = 1.8;
 hsp = 0;
 vsp = 0;
 
+is_aiming_left = false
+
 shoot_timer = 0;
 shoot_cooldown = 29;
 
-collision_layer = layer_tilemap_get_id("tiles_collision");
-instance_layer = layer_tilemap_get_id("instances");
+collision_layer = layer_tilemap_get_id("Tiles_C");
+instance_layer = layer_tilemap_get_id("Player");
 
 // Variables for scr_draw
 x_weapon_offset = 1;
@@ -91,7 +90,7 @@ weapon_length = sprite_get_bbox_right(spr_ray_gun) - sprite_get_xoffset(spr_ray_
 		
 			// Create instance of obj_green_bullet
 			audio_play_sound(snd_ray_gun, 0, 0, 1, 0, random_range(0.9, 1))
-			var _green_bullet = instance_create_layer(x + _x_offset, y + _y_offset, "instances", bullet);
+			var _green_bullet = instance_create_layer(x + _x_offset, y + _y_offset, "Entities", bullet);
 			with(_green_bullet) dir = other.aimdir;
 		}
 	}

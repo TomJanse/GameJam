@@ -13,7 +13,7 @@ destroy = false;
 // Configure whether bullet gets destroyed upon impact or continues traveling
 destroy_upon_impact = true;
 
-collision_layer = layer_tilemap_get_id("tiles_collision");
+collision_layer = layer_tilemap_get_id("Tiles_C");
 #endregion
 
 // Moves the bullet in direction dir
@@ -35,7 +35,7 @@ function cleanup()
 	// Actually destroy bullet
 	if (destroy == true) instance_destroy();
 	
-	// Destroy bullet upon hitting "tiles_collision"
+	// Destroy bullet upon hitting "Tiles_C"
 	if place_meeting(x, y, collision_layer) 
 	{
 		destroy = true;
