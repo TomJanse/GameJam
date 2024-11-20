@@ -1,4 +1,7 @@
 // Inherit the parent event
 event_inherited();
-walk()
-shoot()
+
+if (state == "alive") {
+	shoot()
+	walk()
+}
