@@ -16,4 +16,4 @@ else if state == "Dead"
 }
 
 // Debug: show hp
-draw_text(x, y, string(hp));
+//draw_text(x, y, string(hp));

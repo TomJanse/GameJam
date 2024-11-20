@@ -1,17 +1,21 @@
 {
   "$GMObject":"",
-  "%Name":"obj_damage_parent",
+  "%Name":"obj_enemy_guard_blue",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_damage_parent",
+  "name":"obj_enemy_guard_blue",
   "overriddenProperties":[],
   "parent":{
-    "name":"system",
-    "path":"folders/Objects/system.yy",
+    "name":"enemy_guard",
+    "path":"folders/Objects/enemy_guard.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_enemy_guard_parent",
+    "path":"objects/obj_enemy_guard_parent/obj_enemy_guard_parent.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -29,7 +33,10 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
+  "spriteId":{
+    "name":"spr_enemy_parent",
+    "path":"sprites/spr_enemy_parent/spr_enemy_parent.yy",
+  },
   "spriteMaskId":null,
   "visible":true,
 }
