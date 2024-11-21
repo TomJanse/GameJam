@@ -9,8 +9,8 @@ randomize()
 //		The drawing of these rooms will not function if given a room size that doesn't
 //		match with the given sizes in tiles and tile_size.
 global.tile_size = 8
-global.room_cell_width_in_tiles = 30
-global.room_cell_height_in_tiles = 20
+global.room_cell_width_in_tiles = 40
+global.room_cell_height_in_tiles = 22
 room_cell_width = global.room_cell_width_in_tiles * global.tile_size
 room_cell_height = global.room_cell_height_in_tiles * global.tile_size
 
