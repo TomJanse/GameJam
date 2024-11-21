@@ -11,7 +11,7 @@
   "overriddenProperties":[],
   "parent":{
     "name":"enemy_guard",
-    "path":"folders/Objects/enemy_guard.yy",
+    "path":"folders/Objects/enemies/enemy_guard.yy",
   },
   "parentObjectId":{
     "name":"obj_enemy_parent",

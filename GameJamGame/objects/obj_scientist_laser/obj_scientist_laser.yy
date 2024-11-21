@@ -1,20 +1,22 @@
 {
   "$GMObject":"",
-  "%Name":"obj_enemy_parent",
+  "%Name":"obj_scientist_laser",
   "eventList":[
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
     {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":8,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
-    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":12,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
+    {"$GMEvent":"v1","%Name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,"name":"","resourceType":"GMEvent","resourceVersion":"2.0",},
   ],
   "managed":true,
-  "name":"obj_enemy_parent",
+  "name":"obj_scientist_laser",
   "overriddenProperties":[],
   "parent":{
-    "name":"enemies",
-    "path":"folders/Objects/enemies.yy",
+    "name":"enemy_scientist",
+    "path":"folders/Objects/enemies/enemy_scientist.yy",
   },
-  "parentObjectId":null,
+  "parentObjectId":{
+    "name":"obj_damage_player",
+    "path":"objects/obj_damage_player/obj_damage_player.yy",
+  },
   "persistent":false,
   "physicsAngularDamping":0.1,
   "physicsDensity":0.5,
@@ -32,7 +34,13 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":null,
-  "spriteMaskId":null,
+  "spriteId":{
+    "name":"spr_laser_beam",
+    "path":"sprites/spr_laser_beam/spr_laser_beam.yy",
+  },
+  "spriteMaskId":{
+    "name":"spr_laser_beam",
+    "path":"sprites/spr_laser_beam/spr_laser_beam.yy",
+  },
   "visible":true,
 }
