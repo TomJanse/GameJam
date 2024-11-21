@@ -228,7 +228,7 @@ function is_cleared(_room_data) {
 	var _enemies = _room_data.enemies
 
 	for(var _j = 0; _j < array_length(_enemies); _j++) {
-		if(instance_exists(_enemies[_j].enemy)) return false
+		if(_enemies[_j].enemy.state == "alive") return false
 	}
 	return true
 }
