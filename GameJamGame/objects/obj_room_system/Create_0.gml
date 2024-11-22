@@ -9,8 +9,8 @@ randomize()
 //		The drawing of these rooms will not function if given a room size that doesn't
 //		match with the given sizes in tiles and tile_size.
 global.tile_size = 8
-global.room_cell_width_in_tiles = 30
-global.room_cell_height_in_tiles = 20
+global.room_cell_width_in_tiles = 40
+global.room_cell_height_in_tiles = 22
 room_cell_width = global.room_cell_width_in_tiles * global.tile_size
 room_cell_height = global.room_cell_height_in_tiles * global.tile_size
 
@@ -66,8 +66,9 @@ global.rooms = [
 
 #region // Enemy spawn groups
 global.enemy_spawn_groups = [
-	[obj_enemy, obj_enemy, obj_enemy],
-	[obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy],
+	[obj_enemy_guard_red, obj_enemy_guard_red],
+	[obj_enemy_guard_blue, obj_enemy_guard_blue],
+	[obj_enemy_guard_blue, obj_enemy_guard_red],
 ]
 #endregion
 
@@ -227,7 +228,7 @@ function is_cleared(_room_data) {
 	var _enemies = _room_data.enemies
 
 	for(var _j = 0; _j < array_length(_enemies); _j++) {
-		if(instance_exists(_enemies[_j].enemy)) return false
+		if(_enemies[_j].enemy.state == "alive") return false
 	}
 	return true
 }
