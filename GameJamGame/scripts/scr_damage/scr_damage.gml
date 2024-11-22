@@ -42,7 +42,7 @@
 		image_alpha = 1;
 		
 		// Damage checking cycle
-		if place_meeting(x, y, _damage_object)
+		if place_meeting(x, y, [_damage_object, ])
 		{	
 			// Get list of damage instances currently hitting enemy
 			var _inst_list = ds_list_create();
