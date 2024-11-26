@@ -1,11 +1,11 @@
-/// @description
+/// @description 
 // GameMaker random values are based on initial seed. This function randomizes seed so
 //		that actual random values are generated.
 randomize()
 
 #region // Room generation variables
 // These variables exist to measure out the placement of rooms on the floor.
-//		The room cell in tiles assumes a room it can draw has 240 width and 160 height.
+//		The room cell in tiles assumes a room it can draw has 320 width and 176 height.
 //		The drawing of these rooms will not function if given a room size that doesn't
 //		match with the given sizes in tiles and tile_size.
 global.tile_size = 8
@@ -66,9 +66,7 @@ global.rooms = [
 
 #region // Enemy spawn groups
 global.enemy_spawn_groups = [
-	[obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_guard_blue, obj_enemy_guard_blue],
-	[obj_enemy_guard_blue, obj_enemy_guard_red],
+	[obj_boss_turret],
 ]
 #endregion
 

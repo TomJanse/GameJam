@@ -7,7 +7,7 @@ spd = 1.5;
 hsp = 0;
 vsp = 0;
 
-max_dist = 200;
+max_dist = 400;
 destroy = false;
 
 // Configure whether bullet gets destroyed upon impact or continues traveling
