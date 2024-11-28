@@ -15,6 +15,7 @@
     {"$GMFolder":"","%Name":"Fonts","folderPath":"folders/Fonts.yy","name":"Fonts","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Notes","folderPath":"folders/Notes.yy","name":"Notes","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Objects","folderPath":"folders/Objects.yy","name":"Objects","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"boss_turret","folderPath":"folders/Objects/boss_turret.yy","name":"boss_turret","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"enemy_guard","folderPath":"folders/Objects/enemy_guard.yy","name":"enemy_guard","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"system","folderPath":"folders/Objects/system.yy","name":"system","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Particle Systems","folderPath":"folders/Particle Systems.yy","name":"Particle Systems","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -37,6 +38,7 @@
   },
   "name":"GameJamGame",
   "resources":[
+    {"id":{"name":"obj_boss_turret","path":"objects/obj_boss_turret/obj_boss_turret.yy",},},
     {"id":{"name":"obj_damage_enemy","path":"objects/obj_damage_enemy/obj_damage_enemy.yy",},},
     {"id":{"name":"obj_damage_parent","path":"objects/obj_damage_parent/obj_damage_parent.yy",},},
     {"id":{"name":"obj_damage_player","path":"objects/obj_damage_player/obj_damage_player.yy",},},
