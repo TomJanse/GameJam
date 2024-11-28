@@ -66,7 +66,6 @@ global.rooms = [
 
 #region // Enemy spawn groups
 global.enemy_spawn_groups = [
-	[obj_boss_turret],
 	[obj_enemy_guard_blue],
 	[obj_enemy_guard_red],
 	[obj_enemy_guard_blue, obj_enemy_guard_blue],
@@ -111,6 +110,8 @@ for(var _i = 0; _i < _width; _i++) {
 // Set X and Y of start room to center room
 var _start_x = 4
 var _start_y = 4
+var _end_x
+var _end_y
 
 var _room_count = 0
 for(var _i = 0; _i < _generation_passes; _i++) {
@@ -195,6 +196,26 @@ for(var _i = 0; _i < _generation_passes; _i++) {
 //	- a bool storing if the room has been cleared;
 rooms = []
 
+// Find the room farthest from the center in steps
+var _max_distance = -1;
+var _farthest_x = -1;
+var _farthest_y = -1;
+
+// Iterate through the grid
+for (var _i = 0; _i < _width; _i++) {
+    for (var _j = 0; _j < _height; _j++) {
+		var _current_room_connections = blueprint[# _i, _j]
+        if (array_equals(_current_room_connections, [false, false, false, false])) {
+            var distance = abs(_i - _start_x) + abs(_j - _start_y) // Manhattan distance
+            if (distance > _max_distance) {
+                _max_distance = distance
+                _farthest_x = _i
+                _farthest_y = _j
+            }
+        }
+    }
+}
+
 // Draw random rooms for each given location and connections
 for(var _i = 0; _i < _width; _i++) {
 	for(var _j = 0; _j < _height; _j++) {
@@ -215,6 +236,20 @@ for(var _i = 0; _i < _width; _i++) {
 		var _bound_x_right = (_start_tile_room_x + global.room_cell_width_in_tiles) * global.tile_size
 		var _bound_y_bottom = (_start_tile_room_y + global.room_cell_height_in_tiles) * global.tile_size
 		
+		// Calculate the center of the room
+		var _start_room_center_x = (_start_tile_room_x + (global.room_cell_width_in_tiles / 2)) * global.tile_size + global.tile_size / 2
+		var _start_room_center_y = (_start_tile_room_y + (global.room_cell_height_in_tiles / 2)) * global.tile_size + global.tile_size / 2
+		
+		if(_i == _farthest_x && _j == _farthest_y) {
+			_room_data.enemies = [
+				{
+					spawn_x: _start_room_center_x,
+					spawn_y: _start_room_center_y,
+					enemy: [obj_boss_turret]
+				}
+			]
+		}
+		
 		// Create and store room data
 		array_push(rooms, { 
 			enemies: _room_data.enemies,
@@ -224,11 +259,7 @@ for(var _i = 0; _i < _width; _i++) {
 		}) 
 				
 		// Place player in start room
-		if(_i == _start_x && _j == _start_y) {
-			var _start_room_center_x = (_start_tile_room_x + (global.room_cell_width_in_tiles / 2)) * global.tile_size + global.tile_size / 2
-			var _start_room_center_y = (_start_tile_room_y + (global.room_cell_height_in_tiles / 2)) * global.tile_size + global.tile_size / 2
-			instance_create_layer(_start_room_center_x, _start_room_center_y, "Player", obj_player)
-		}
+		if(_i == _start_x && _j == _start_y) instance_create_layer(_start_room_center_x, _start_room_center_y, "Player", obj_player)
 	}
 }
 
