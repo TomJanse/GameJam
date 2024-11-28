@@ -2,7 +2,7 @@
 event_inherited();
 
 #region // Variables
-hp = 100
+hp = 70
 
 walk_distance = 50
 walk_speed = 1
@@ -21,7 +21,7 @@ attack_ongoing = -1
 attack_cone_angle = 60
 attack_cone_angle_step = 1
 
-attack_spray_angle = 120
+attack_spray_angle = 160
 attack_spray_shots = 40
 attack_spray_shot_count = 0
 
@@ -75,8 +75,8 @@ function move() {
 }
 
 function shoot() {
-	if (shoot_cooldown_timer) return shoot_cooldown_timer--	
 	if (!walk_cooldown_timer) return
+	if (shoot_cooldown_timer) return shoot_cooldown_timer--	
 	
 	if(!can_see_player(id)) return
 	
@@ -106,6 +106,9 @@ function set_aim_direction() {
 }
 
 function create_bullet(_dir) {
+	// Play shot sound
+	audio_play_sound(snd_ray_gun, 0, 0, 1, 0, random_range(0.9, 1))
+	
 	var _red_bullet = instance_create_layer(x, y - (sprite_height / 2), "Entities", obj_red_bullet);
 	with(_red_bullet) dir = _dir;
 }
@@ -180,4 +183,9 @@ function attack_spiral() {
 	
 	
 	attack_spiral_shot_count++
+}
+
+// Override death function
+function death() {
+	instance_destroy()
 }

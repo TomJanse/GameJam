@@ -39,7 +39,6 @@ function cleanup()
 	if place_meeting(x, y, collision_layer) 
 	{
 		destroy = true;
-		audio_play_sound(snd_bullet_destroy, 0, 0, 1, 0, random_range(0.9, 1))
 	}
 	
 	// Destroy bullet upon traveling too far

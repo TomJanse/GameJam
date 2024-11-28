@@ -1,6 +1,8 @@
 // Inherit the parent event
 event_inherited();
 
-move()
-set_aim_direction()
-shoot()
+if(state == "alive") {
+	move()
+	set_aim_direction()
+	shoot()	
+}
