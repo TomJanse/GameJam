@@ -134,7 +134,7 @@ weapon_length = sprite_get_bbox_right(spr_ray_gun) - sprite_get_xoffset(spr_ray_
 		// Head bonk sound
 		if sprite_index == spr_player_dead and head_bonked == false
 		{
-			audio_play_sound(snd_head_bonk, 0, 0, 1, 0, random_range(0.9, 1));
+			audio_play_sound(snd_bonk, 0, 0, 1, 0, random_range(0.9, 1));
 		
 			// Head can't bonk twice
 			head_bonked = true

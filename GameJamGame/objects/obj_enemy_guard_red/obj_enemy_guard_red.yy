@@ -34,8 +34,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_enemy_parent",
-    "path":"sprites/spr_enemy_parent/spr_enemy_parent.yy",
+    "name":"spr_guard_red_idle",
+    "path":"sprites/spr_guard_red_idle/spr_guard_red_idle.yy",
   },
   "spriteMaskId":null,
   "visible":true,

@@ -93,7 +93,7 @@ function shoot() {
 	aimdir = point_direction(x, y - (sprite_height / 2), player.x, player.y - (player.sprite_height / 2));
 	
 	// Play shot sound
-	audio_play_sound(snd_ray_gun, 0, 0, 1, 0, random_range(0.9, 1))
+	audio_play_sound(snd_guard_gun, 0, 0, 1, 0, random_range(0.9, 1))
 	
 	// Create bullet and give it direction
 	var _red_bullet = instance_create_layer(x, y - (sprite_height / 2), "Entities", obj_red_bullet);

@@ -14,10 +14,6 @@ audio_play_sound(ost_amethyst_cockpit, 0, true);
 
 function music_toggle()
 {
-	// Get mouse x and y on gui, taking into account current window size
-	gui_mouse_x = display_mouse_get_x() - window_get_x();  
-	gui_mouse_y = display_mouse_get_y() - window_get_y(); 
-
 	// Check if the player clicked on the music toggle button
 	if point_in_rectangle(gui_mouse_x, gui_mouse_y, mus_x, mus_y, mus_x + mus_width, mus_y + mus_height) 
 	{

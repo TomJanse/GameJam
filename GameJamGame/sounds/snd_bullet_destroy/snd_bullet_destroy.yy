@@ -21,5 +21,5 @@
   "sampleRate":44100,
   "soundFile":"snd_bullet_destroy.wav",
   "type":0,
-  "volume":0.3,
+  "volume":0.35,
 }
