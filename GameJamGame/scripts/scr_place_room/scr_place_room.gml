@@ -19,8 +19,10 @@ function draw_room_tiles(_tiles_map, _tiles, _tile_start_x, _tile_start_y) {
 		
 		// Store enemy spawn tile locations and door tile locations and types
 		if(_tile_index == global.spawn_tile_index) array_push(_enemy_spawn_tiles, [_tile_x, _tile_y])
-		else if (_tile_index == global.door_left_tile_index || _tile_index == global.door_right_tile_index
-			|| _tile_index == global.door_up_tile_index || _tile_index == global.door_down_tile_index) {
+		else if (array_contains(global.door_index.door_down, _tile_index) ||
+		 array_contains(global.door_index.door_up, _tile_index) ||
+		 array_contains(global.door_index.door_left, _tile_index) ||
+		 array_contains(global.door_index.door_right, _tile_index)) {
 			array_push(_door_tiles, [_tile_x, _tile_y, _tile_index])	
 		}
 			

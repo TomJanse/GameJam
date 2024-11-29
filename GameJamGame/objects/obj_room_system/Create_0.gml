@@ -40,6 +40,16 @@ enum DIRECTION {
 #region // Rooms
 global.current_room = -1
 // TODO: Change tile indexes to correct values when tile map is complete
+global.collision_tile_index = 89
+global.door_index = {
+	door_left: [189, 233, 277, 321],
+	door_right: [190, 234, 278, 322],
+	door_up_open: [365, 366, 367, 368, 409, 410, 411, 412, 453, 454, 455, 456],
+	door_up: [369,370,371,372,413,414,415,416,457,458,459,460],
+	door_up_top: [369,370,371, 372],
+	door_up_collision_only: [369,370,371,372,413,414,415,416],
+	door_down: [323, 324, 325, 326]
+}
 global.spawn_tile_index = 1
 global.door_left_tile_index = 2
 global.door_right_tile_index = 2
@@ -189,6 +199,31 @@ for(var _i = 0; _i < _generation_passes; _i++) {
 	if(_room_count > (_width * _height) / _max_population_percent) break
 }
 
+/// @description					Open or close the doors of a given room.
+/// @param	{Struct} _room_data		The room data containing door tiles.
+/// @param	{Bool} _open			Whether to open (true) or close (false) the doors.
+function change_door_state(_room_data, _open) {
+	for (var _i = 0; _i < array_length(_room_data.door_tiles); _i++) {
+		var _tile = _room_data.door_tiles[_i]
+		if (_open) {
+			// Remove collision
+			tilemap_set(global.tiles_map_collision, 0, _tile[0], _tile[1])
+			
+			// Remove collision on layer of wall above door up
+			if(array_contains(global.door_index.door_up_top, _tile[2])) {
+				tilemap_set(global.tiles_map_collision, 0 , _tile[0], _tile[1] - 1)	
+			}
+		} else {
+			// Skip bottom layer of door up
+			if (array_contains(global.door_index.door_up, _tile[2]) && 
+				!array_contains(global.door_index.door_up_collision_only, _tile[2])) continue
+				
+			// Add collision
+			tilemap_set(global.tiles_map_collision, global.collision_tile_index, _tile[0], _tile[1])
+		}
+	}
+}
+
 // Floor grid stores for all locations:
 //	- an array of coordinates of the four corners of the location;
 //	- an array of enemy data structs containing X and Y coordinates for each and enemy type object;
@@ -206,9 +241,9 @@ for (var _i = 0; _i < _width; _i++) {
     for (var _j = 0; _j < _height; _j++) {
 		var _current_room_connections = blueprint[# _i, _j]
         if (array_equals(_current_room_connections, [false, false, false, false])) {
-            var distance = abs(_i - _start_x) + abs(_j - _start_y) // Manhattan distance
-            if (distance > _max_distance) {
-                _max_distance = distance
+            var _distance = abs(_i - _start_x) + abs(_j - _start_y) // Manhattan distance
+            if (_distance > _max_distance) {
+                _max_distance = _distance
                 _farthest_x = _i
                 _farthest_y = _j
             }
@@ -250,13 +285,17 @@ for(var _i = 0; _i < _width; _i++) {
 			]
 		}
 		
-		// Create and store room data
-		array_push(rooms, { 
+		var _new_room_data =  { 
 			enemies: _room_data.enemies,
 			bounds: [_bound_x_left, _bound_y_top, _bound_x_right, _bound_y_bottom],
 			door_tiles: _room_data.door_tiles,
 			cleared: false
-		}) 
+		}
+		
+		// Create and store room data
+		array_push(rooms, _new_room_data) 
+		
+		change_door_state(_new_room_data, true)
 				
 		// Place player in start room
 		if(_i == _start_x && _j == _start_y) instance_create_layer(_start_room_center_x, _start_room_center_y, "Player", obj_player)
@@ -303,27 +342,7 @@ function push_player_into_room(_player, _previous_bounds) {
 		if (_player.x <= _previous_bounds[0]) _player.x -= global.tile_size * 2 // Entered from the right	
 		else if (_player.x >= _previous_bounds[2]) _player.x += global.tile_size * 2 // Entered from the left
 		else if (_player.y <= _previous_bounds[1]) _player.y -= global.tile_size // Entered from the bottom
-		else  _player.y += global.tile_size * 3 // Entered from the top
-}
-
-/// @description					Open or close the doors of a given room.
-/// @param	{Struct} _room_data		The room data containing door tiles.
-/// @param	{Bool} _open			Whether to open (true) or close (false) the doors.
-function change_door_state(_room_data, _open) {
-	for (var _i = 0; _i < array_length(_room_data.door_tiles); _i++) {
-		var _door = _room_data.door_tiles[_i];
-		
-		// If opening, clear collision and update decorative layer
-		if (_open) {
-			tilemap_set(global.tiles_map_collision, 0, _door[0], _door[1]);
-			tilemap_set(global.tiles_map_decorative, _door[2], _door[0], _door[1]);
-		} 
-		// If closing, update collision and clear decorative layer
-		else {
-			tilemap_set(global.tiles_map_collision, _door[2], _door[0], _door[1]);
-			tilemap_set(global.tiles_map_decorative, 0, _door[0], _door[1]);
-		}
-	}
+		else  _player.y += global.tile_size * 5 // Entered from the top
 }
 
 /// @description	Tracks which room the player is in and updates the rooms.
