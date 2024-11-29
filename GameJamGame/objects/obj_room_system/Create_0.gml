@@ -66,6 +66,8 @@ global.rooms = [
 
 #region // Enemy spawn groups
 global.enemy_spawn_groups = [
+	[obj_enemy, obj_enemy, obj_guard_dog],
+	[obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy, obj_enemy],
 	[obj_enemy_guard_blue],
 	[obj_enemy_guard_red],
 	[obj_enemy_guard_blue, obj_enemy_guard_blue],
