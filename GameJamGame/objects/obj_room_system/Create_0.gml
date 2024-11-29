@@ -46,21 +46,21 @@ global.door_right_tile_index = 2
 global.door_up_tile_index = 2
 global.door_down_tile_index = 2
 global.rooms = [
+	[rm_lab_01, false, true, true, true],
+	[rm_lab_02, true, true, true, true],
+	[rm_lab_03, true, false, true, false],
+	[rm_lab_04, true, true, false, true],
+	[rm_lab_05, false, true, false, true],
+	[rm_lab_06, true, false, false, true],
+	[rm_lab_07, true, true, false, false],
+	[rm_lab_08, false, false, true, true],
+	[rm_lab_09, false, true, true, false],
+	[rm_lab_10, true, false, true, true],
 	[rm_basic, false, false, false, true],
 	[rm_basic, false, false, true, false],
-	[rm_basic, false, false, true, true],
 	[rm_basic, false, true, false, false],
-	[rm_basic, false, true, false, true],
-	[rm_basic, false, true, true, false],
-	[rm_basic, false, true, true, true],
 	[rm_basic, true, false, false, false],
-	[rm_basic, true, false, false, true],
-	[rm_basic, true, false, true, false],
-	[rm_basic, true, false, true, true],
-	[rm_basic, true, true, false, false],
-	[rm_basic, true, true, false, true],
 	[rm_basic, true, true, true, false],
-	[rm_basic, true, true, true, true]
 ]
 #endregion
 

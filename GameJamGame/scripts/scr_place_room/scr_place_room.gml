@@ -83,8 +83,8 @@ function calculate_random_enemies(_enemy_spawn_tiles) {
 function place_room(_room, _tile_start_x, _tile_start_y) {
 	// Get room to draw tile and instance information
 	var _room_info = room_get_info(_room, false, false, true, true, true)
-	var _room_tiles_col = _room_info.layers[0].elements[0].tiles
-	var _room_tiles_dec = _room_info.layers[1].elements[0].tiles
+	var _room_tiles_col = _room_info.layers[1].elements[0].tiles
+	var _room_tiles_dec = _room_info.layers[0].elements[0].tiles
 	
 	// Draw the collision tiles
 	draw_room_tiles(global.tiles_map_collision, _room_tiles_col, _tile_start_x, _tile_start_y)

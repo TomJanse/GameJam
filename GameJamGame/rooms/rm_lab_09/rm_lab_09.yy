@@ -28,13 +28,13 @@
           0,-39,-2147483648,1,0,-18,-2147483648,-8,0,-13,-2147483648,1,0,-18,-2147483648,-8,0,-13,-2147483648,
           1,0,
         ],"TileDataFormat":1,},"tilesetId":{"name":"ts_lab","path":"tilesets/ts_lab/ts_lab.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
-    {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4278190080,"depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
-    {"$GMRTileLayer":"","%Name":"Tiles_C","depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_C","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":22,"SerialiseWidth":40,"TileCompressedData":[
+    {"$GMRTileLayer":"","%Name":"Tiles_C","depth":100,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Tiles_C","properties":[],"resourceType":"GMRTileLayer","resourceVersion":"2.0","tiles":{"SerialiseHeight":22,"SerialiseWidth":40,"TileCompressedData":[
           -139,337,-4,0,-36,337,-4,-2147483648,-36,337,-4,-2147483648,-36,337,-5,-2147483648,-35,337,-5,-2147483648,
           -17,337,-6,-2147483648,1,337,-6,-2147483648,1,337,-9,-2147483648,-17,337,-24,-2147483648,-16,337,-24,
           -2147483648,-16,337,-24,-2147483648,-16,337,-24,-2147483648,-16,337,-24,-2147483648,-16,337,-24,-2147483648,
           -18,337,-23,-2147483648,1,337,-3,-2147483648,-14,337,-26,-2147483648,-14,337,-26,-2147483648,-170,337,
         ],"TileDataFormat":1,},"tilesetId":{"name":"ts_lab","path":"tilesets/ts_lab/ts_lab.yy",},"userdefinedDepth":false,"visible":true,"x":0,"y":0,},
+    {"$GMRBackgroundLayer":"","%Name":"Background","animationFPS":15.0,"animationSpeedType":0,"colour":4278190080,"depth":200,"effectEnabled":true,"effectType":null,"gridX":32,"gridY":32,"hierarchyFrozen":false,"hspeed":0.0,"htiled":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"inheritSubLayers":true,"inheritVisibility":true,"layers":[],"name":"Background","properties":[],"resourceType":"GMRBackgroundLayer","resourceVersion":"2.0","spriteId":null,"stretch":false,"userdefinedAnimFPS":false,"userdefinedDepth":false,"visible":true,"vspeed":0.0,"vtiled":false,"x":0,"y":0,},
   ],
   "name":"rm_lab_09",
   "parent":{

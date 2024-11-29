@@ -35,8 +35,8 @@
   "resourceVersion":"2.0",
   "solid":false,
   "spriteId":{
-    "name":"spr_damage_test",
-    "path":"sprites/spr_damage_test/spr_damage_test.yy",
+    "name":"spr_gazeinator",
+    "path":"sprites/spr_gazeinator/spr_gazeinator.yy",
   },
   "spriteMaskId":null,
   "visible":true,
