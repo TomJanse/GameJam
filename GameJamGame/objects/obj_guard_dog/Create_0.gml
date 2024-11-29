@@ -85,7 +85,7 @@ distance = point_distance(x, y, player.x, player.y-7);
 	}
 
 // Set bite sprite
-bite_warning_distance = distance_to_player(obj_guard_dog, player);
+distance = bite_warning_distance
 
 	if (abs(vsp) > abs(hsp)) 
 	{
