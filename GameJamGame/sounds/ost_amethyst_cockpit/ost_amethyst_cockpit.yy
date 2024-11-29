@@ -1,0 +1,25 @@
+{
+  "$GMSound":"",
+  "%Name":"ost_amethyst_cockpit",
+  "audioGroupId":{
+    "name":"audiogroup_default",
+    "path":"audiogroups/audiogroup_default",
+  },
+  "bitDepth":1,
+  "bitRate":128,
+  "compression":0,
+  "conversionMode":0,
+  "duration":148.12498,
+  "name":"ost_amethyst_cockpit",
+  "parent":{
+    "name":"Sounds",
+    "path":"folders/Sounds.yy",
+  },
+  "preload":false,
+  "resourceType":"GMSound",
+  "resourceVersion":"2.0",
+  "sampleRate":44100,
+  "soundFile":"ost_amethyst_cockpit.ogg",
+  "type":0,
+  "volume":0.15,
+}

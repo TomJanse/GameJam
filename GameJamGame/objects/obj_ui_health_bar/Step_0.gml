@@ -1,0 +1,1 @@
+hp_bar = 5 - player.hp;

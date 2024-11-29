@@ -6,8 +6,8 @@
   "name":"obj_damage_player",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"obj_damage",
+    "path":"folders/Objects/obj_damage.yy",
   },
   "parentObjectId":{
     "name":"obj_damage_parent",
