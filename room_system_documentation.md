@@ -16,12 +16,13 @@ The `obj_room_system` in this project is responsible for generating roguelike-st
 
 ### Room Dimensions
 - **Tile Size**: 8x8 pixels (defined as `global.tile_size`).
-- **Room Size**: 30 tiles wide by 20 tiles high (`global.room_cell_width_in_tiles`, `global.room_cell_height_in_tiles`).
+- **Room Size**: 40 tiles wide by 22 tiles high (`global.room_cell_width_in_tiles`, `global.room_cell_height_in_tiles`).
+- So a room is 320 by 176.
 
 Ensure that room layouts and assets are designed to fit these dimensions exactly.
 
 ### Connections
-Each room must define its connections using the following boolean array format:
+Each room must define its connections in the `global.rooms` in `obj_room_system` using the following boolean array format:
 ```gml
   [RIGHT, UP, LEFT, DOWN]
 ```
@@ -30,6 +31,9 @@ Each room must define its connections using the following boolean array format:
 - A room must have its doors on the edge of the relevant side, not somewhere in the middle.
 - Every door must be 2 tiles wide.
 - A door must be in the middle of the relevant side, not somewhere up or down in a corner.
+
+- Doors will swap between the collision and decoration layers to open and close them.
+- All doors must start on the decoration layer and ergo be opened.
 
 ### Tile Indexes
 

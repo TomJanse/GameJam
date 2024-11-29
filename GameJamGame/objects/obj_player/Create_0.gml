@@ -129,7 +129,7 @@ weapon_length = sprite_get_bbox_right(spr_ray_gun) - sprite_get_xoffset(spr_ray_
 		}
 	
 		// Head on floor image
-		else if (image_index >= 26) sprite_index = spr_player_dead;
+		else if (image_index >= image_number - 1) sprite_index = spr_player_dead;
 	
 		// Head bonk sound
 		if sprite_index == spr_player_dead and head_bonked == false
@@ -141,6 +141,16 @@ weapon_length = sprite_get_bbox_right(spr_ray_gun) - sprite_get_xoffset(spr_ray_
 		}
 	}
 
+// User Interface
+	// Initialize UI
+	function ui()
+	{
+		instance_create_layer(x, y, "Player", obj_ui_health_bar);
+		instance_create_layer(x, y, "Player", obj_ui_music_toggle);
+	}
+	
+	// Create UI
+	ui();
 
 
 

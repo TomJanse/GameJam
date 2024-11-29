@@ -1,5 +1,5 @@
 // Draw weapon
-function draw_weapon(_sprite)
+function draw_weapon(_sprite,)
 {
 	// Offsets
 	var _x_offset = lengthdir_x(x_weapon_offset, aimdir);
