@@ -39,14 +39,12 @@ enum DIRECTION {
 
 #region // Rooms
 global.current_room = -1
-// TODO: Change tile indexes to correct values when tile map is complete
 global.collision_tile_index = 89
 global.floor_tile_index = 201
 global.above_door_up_index = 331
 global.door_index = {
 	door_left: [189, 233, 277, 321],
 	door_right: [190, 234, 278, 322],
-	door_up_open: [365, 366, 367, 368, 409, 410, 411, 412, 453, 454, 455, 456],
 	door_up: [369,370,371,372,413,414,415,416,457,458,459,460],
 	door_up_top: [369,370,371, 372],
 	door_up_collision_only: [369,370,371,372,413,414,415,416],
