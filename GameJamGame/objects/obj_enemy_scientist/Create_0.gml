@@ -24,6 +24,12 @@ shoot_cooldown = 180
 shoot_duration = 180
 shoot_cooldown_timer = shoot_cooldown
 
+// Variables for scr_draw
+x_weapon_offset = 1
+y_weapon_offset = 2
+center_y_offset = 7
+updown_offset = 5
+
 collision_tiles = layer_tilemap_get_id("Tiles_C")
 player = instance_nearest(0, 0, obj_player)
 #endregion

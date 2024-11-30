@@ -106,6 +106,7 @@
     {"id":{"name":"spr_damage_test","path":"sprites/spr_damage_test/spr_damage_test.yy",},},
     {"id":{"name":"spr_dog_back_bite","path":"sprites/spr_dog_back_bite/spr_dog_back_bite.yy",},},
     {"id":{"name":"spr_dog_back","path":"sprites/spr_dog_back/spr_dog_back.yy",},},
+    {"id":{"name":"spr_dog_dead","path":"sprites/spr_dog_dead/spr_dog_dead.yy",},},
     {"id":{"name":"spr_dog_death","path":"sprites/spr_dog_death/spr_dog_death.yy",},},
     {"id":{"name":"spr_dog_front_bite","path":"sprites/spr_dog_front_bite/spr_dog_front_bite.yy",},},
     {"id":{"name":"spr_dog_front","path":"sprites/spr_dog_front/spr_dog_front.yy",},},

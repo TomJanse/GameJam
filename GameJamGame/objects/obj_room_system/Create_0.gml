@@ -86,14 +86,13 @@ global.enemy_spawn_groups = [
 	//[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red],
 	//[obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
 	//[obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
-	
 	// Scientist groups
 	[obj_enemy_scientist],
-	[obj_enemy_scientist, obj_enemy_guard_blue],
-	[obj_enemy_scientist, obj_enemy_guard_red],
-	[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_red],
-	[obj_enemy_scientist, obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_blue]
+	//[obj_enemy_scientist, obj_enemy_guard_blue],
+	//[obj_enemy_scientist, obj_enemy_guard_red],
+	//[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_red],
+	//[obj_enemy_scientist, obj_enemy_guard_red, obj_enemy_guard_red],
+	//[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_blue]
 ]
 #endregion
 
