@@ -88,8 +88,6 @@ function bite()
 	}
 
 // Set bite sprite
-distance = bite_warning_distance
-
 	if (abs(vsp) > abs(hsp)) 
 	{
 		if (vsp > 0 and distance < bite_warning_distance) sprite_index = spr_dog_front_bite;
@@ -112,4 +110,17 @@ distance = bite_warning_distance
 	{
 		move_speed = reset_speed; 
 	}
+}
+
+function death() {
+	if(sprite_index != spr_dog_death && sprite_index != spr_dog_dead) {
+		sprite_index = spr_dog_death
+	} else if (sprite_index == spr_dog_death && image_index >= image_number - 1) {
+		sprite_index = spr_dog_dead
+	}
+	
+	// Bonk sound when head hits the floor
+	if (image_index == 5) audio_play_sound(snd_bonk, 0, false, 1, 0, random_range(0.9, 1.1));
+
+	hit_sound = snd_bullet_destroy
 }

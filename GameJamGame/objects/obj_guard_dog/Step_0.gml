@@ -1,4 +1,6 @@
 event_inherited()
-idle()
-move()
-bite()
+if(state == "alive") {
+	idle()
+	move()
+	bite()	
+}
