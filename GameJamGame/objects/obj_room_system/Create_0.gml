@@ -72,28 +72,29 @@ global.rooms = [
 
 #region // Enemy spawn groups
 global.enemy_spawn_groups = [
-	[obj_enemy_guard_blue],
-	[obj_enemy_guard_red],
-	[obj_enemy_guard_blue, obj_enemy_guard_blue],
-	[obj_enemy_guard_blue, obj_enemy_guard_red],
-	[obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue],
-	[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_red],
-	[obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue],
-	[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_red],
-	[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
+	[]
+	//[obj_enemy_guard_blue],
+	//[obj_enemy_guard_red],
+	//[obj_enemy_guard_blue, obj_enemy_guard_blue],
+	//[obj_enemy_guard_blue, obj_enemy_guard_red],
+	//[obj_enemy_guard_red, obj_enemy_guard_red],
+	//[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue],
+	//[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_red],
+	//[obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red],
+	//[obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
+	//[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue],
+	//[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_red],
+	//[obj_enemy_guard_blue, obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red],
+	//[obj_enemy_guard_blue, obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
+	//[obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red, obj_enemy_guard_red],
 	
-	// Scientist groups
-	[obj_enemy_scientist],
-	[obj_enemy_scientist, obj_enemy_guard_blue],
-	[obj_enemy_scientist, obj_enemy_guard_red],
-	[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_red],
-	[obj_enemy_scientist, obj_enemy_guard_red, obj_enemy_guard_red],
-	[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_blue]
+	//// Scientist groups
+	//[obj_enemy_scientist],
+	//[obj_enemy_scientist, obj_enemy_guard_blue],
+	//[obj_enemy_scientist, obj_enemy_guard_red],
+	//[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_red],
+	//[obj_enemy_scientist, obj_enemy_guard_red, obj_enemy_guard_red],
+	//[obj_enemy_scientist, obj_enemy_guard_blue, obj_enemy_guard_blue]
 ]
 #endregion
 
@@ -256,7 +257,7 @@ var _farthest_y = -1;
 for (var _i = 0; _i < _width; _i++) {
     for (var _j = 0; _j < _height; _j++) {
 		var _current_room_connections = blueprint[# _i, _j]
-        if (array_equals(_current_room_connections, [false, false, false, false])) {
+        if (!array_equals(_current_room_connections, [false, false, false, false])) {
             var _distance = abs(_i - _start_x) + abs(_j - _start_y) // Manhattan distance
             if (_distance > _max_distance) {
                 _max_distance = _distance
@@ -296,7 +297,7 @@ for(var _i = 0; _i < _width; _i++) {
 				{
 					spawn_x: _start_room_center_x,
 					spawn_y: _start_room_center_y,
-					enemy: [obj_boss_turret]
+					enemy: obj_boss_turret
 				}
 			]
 		}
