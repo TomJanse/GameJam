@@ -1,6 +1,6 @@
 {
   "$GMSound":"",
-  "%Name":"snd_head_bonk",
+  "%Name":"ost_and_then_so_clear_alien_contact_7_floating_in_space",
   "audioGroupId":{
     "name":"audiogroup_default",
     "path":"audiogroups/audiogroup_default",
@@ -9,8 +9,8 @@
   "bitRate":128,
   "compression":0,
   "conversionMode":0,
-  "duration":0.167052,
-  "name":"snd_head_bonk",
+  "duration":62.541363,
+  "name":"ost_and_then_so_clear_alien_contact_7_floating_in_space",
   "parent":{
     "name":"Sounds",
     "path":"folders/Sounds.yy",
@@ -19,7 +19,7 @@
   "resourceType":"GMSound",
   "resourceVersion":"2.0",
   "sampleRate":44100,
-  "soundFile":"snd_head_bonk.wav",
+  "soundFile":"ost_and_then_so_clear_alien_contact_7_floating_in_space.wav",
   "type":0,
-  "volume":1.0,
+  "volume":0.15,
 }

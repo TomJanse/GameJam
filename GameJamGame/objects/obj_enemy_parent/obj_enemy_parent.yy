@@ -32,10 +32,7 @@
   "resourceType":"GMObject",
   "resourceVersion":"2.0",
   "solid":false,
-  "spriteId":{
-    "name":"spr_enemy_parent",
-    "path":"sprites/spr_enemy_parent/spr_enemy_parent.yy",
-  },
+  "spriteId":null,
   "spriteMaskId":null,
   "visible":true,
 }

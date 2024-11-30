@@ -70,7 +70,7 @@
 					_hit_confirm = true;
 			
 					// Tell instance it has impacted and play sound
-					if (_hit_sound != noone) audio_play_sound(_hit_sound, 0, 0, 1, 0, random_range(0.9, 1.1))
+					if (_hit_sound != noone) audio_play_sound(_hit_sound, 0, false, 1, 0, random_range(0.9, 1.1))
 					_inst.hit_confirm = true;
 				}
 			}

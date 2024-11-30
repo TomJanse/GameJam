@@ -16,6 +16,8 @@
   ],
   "gridX":0,
   "gridY":0,
+  "gridX":8,
+  "gridY":8,
   "height":208,
   "HTile":false,
   "layers":[

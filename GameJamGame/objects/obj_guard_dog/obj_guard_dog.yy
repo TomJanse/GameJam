@@ -9,8 +9,8 @@
   "name":"obj_guard_dog",
   "overriddenProperties":[],
   "parent":{
-    "name":"Objects",
-    "path":"folders/Objects.yy",
+    "name":"Particle Systems",
+    "path":"folders/Particle Systems.yy",
   },
   "parentObjectId":{
     "name":"obj_enemy_parent",

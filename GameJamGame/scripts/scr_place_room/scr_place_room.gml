@@ -19,8 +19,10 @@ function draw_room_tiles(_tiles_map, _tiles, _tile_start_x, _tile_start_y) {
 		
 		// Store enemy spawn tile locations and door tile locations and types
 		if(_tile_index == global.spawn_tile_index) array_push(_enemy_spawn_tiles, [_tile_x, _tile_y])
-		else if (_tile_index == global.door_left_tile_index || _tile_index == global.door_right_tile_index
-			|| _tile_index == global.door_up_tile_index || _tile_index == global.door_down_tile_index) {
+		else if (array_contains(global.door_index.door_down, _tile_index) ||
+		 array_contains(global.door_index.door_up, _tile_index) ||
+		 array_contains(global.door_index.door_left, _tile_index) ||
+		 array_contains(global.door_index.door_right, _tile_index)) {
 			array_push(_door_tiles, [_tile_x, _tile_y, _tile_index])	
 		}
 			
@@ -83,8 +85,8 @@ function calculate_random_enemies(_enemy_spawn_tiles) {
 function place_room(_room, _tile_start_x, _tile_start_y) {
 	// Get room to draw tile and instance information
 	var _room_info = room_get_info(_room, false, false, true, true, true)
-	var _room_tiles_col = _room_info.layers[0].elements[0].tiles
-	var _room_tiles_dec = _room_info.layers[1].elements[0].tiles
+	var _room_tiles_col = _room_info.layers[1].elements[0].tiles
+	var _room_tiles_dec = _room_info.layers[0].elements[0].tiles
 	
 	// Draw the collision tiles
 	draw_room_tiles(global.tiles_map_collision, _room_tiles_col, _tile_start_x, _tile_start_y)
