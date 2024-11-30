@@ -295,6 +295,7 @@ for(var _i = 0; _i < _width; _i++) {
 		
 		var _new_room_data =  { 
 			enemies: _room_data.enemies,
+			enemy_ids: [],
 			bounds: [_bound_x_left, _bound_y_top, _bound_x_right, _bound_y_bottom],
 			door_tiles: _room_data.door_tiles,
 			cleared: false
@@ -303,6 +304,7 @@ for(var _i = 0; _i < _width; _i++) {
 		// Create and store room data
 		array_push(rooms, _new_room_data) 
 		
+		// Open the doors
 		change_door_state(_new_room_data, true)
 				
 		// Place player in start room
@@ -315,11 +317,11 @@ for(var _i = 0; _i < _width; _i++) {
 /// @description	Checks if any enemy in the listed enemies of a room still exists.
 function is_cleared(_room_data) {
 	if(_room_data == -1) return false
-	var _enemies = _room_data.enemies
-
+	var _enemies = _room_data.enemy_ids
+	
 	for(var _j = 0; _j < array_length(_enemies); _j++) {
 		try {
-			if(_enemies[_j].enemy.state == "alive") return false
+			if(_enemies[_j].state == "alive") return false
 		} catch (e){
 			// Do nothing	
 		}
@@ -378,7 +380,8 @@ function update_current_room() {
 		// If room not cleared yet, place enemies, close the doors, and push player
 		//		into room to avoid collision with closing doors.
 		if(!_room_data.cleared) { 
-			spawn_enemies(_room_data.enemies)
+			var _enemy_ids = spawn_enemies(_room_data.enemies)
+			_room_data.enemy_ids = _enemy_ids
 			
 			// Push player into the new room
 			if(global.current_room != -1) push_player_into_room(_player, global.current_room.bounds)
