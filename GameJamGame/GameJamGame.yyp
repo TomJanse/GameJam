@@ -50,6 +50,7 @@
     {"id":{"name":"obj_enemy_guard_parent","path":"objects/obj_enemy_guard_parent/obj_enemy_guard_parent.yy",},},
     {"id":{"name":"obj_enemy_guard_red","path":"objects/obj_enemy_guard_red/obj_enemy_guard_red.yy",},},
     {"id":{"name":"obj_enemy_parent","path":"objects/obj_enemy_parent/obj_enemy_parent.yy",},},
+    {"id":{"name":"obj_enemy_scientist","path":"objects/obj_enemy_scientist/obj_enemy_scientist.yy",},},
     {"id":{"name":"obj_fade","path":"objects/obj_fade/obj_fade.yy",},},
     {"id":{"name":"obj_green_bullet","path":"objects/obj_green_bullet/obj_green_bullet.yy",},},
     {"id":{"name":"obj_guard_dog","path":"objects/obj_guard_dog/obj_guard_dog.yy",},},

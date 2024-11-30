@@ -2,7 +2,6 @@
 event_inherited();
 
 // Choose a random hit sound to play
-
 if (state == "alive") {
 	shoot()
 	walk()
