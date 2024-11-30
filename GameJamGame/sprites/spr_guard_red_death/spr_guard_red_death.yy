@@ -34,8 +34,8 @@
   "nineSlice":null,
   "origin":9,
   "parent":{
-    "name":"GameJamGame",
-    "path":"GameJamGame.yyp",
+    "name":"Sprites",
+    "path":"folders/Sprites.yy",
   },
   "preMultiplyAlpha":false,
   "resourceType":"GMSprite",

@@ -64,11 +64,11 @@ global.rooms = [
 	[rm_lab_08, false, false, true, true],
 	[rm_lab_09, false, true, true, false],
 	[rm_lab_10, true, false, true, true],
-	[rm_basic, false, false, false, true],
-	[rm_basic, false, false, true, false],
-	[rm_basic, false, true, false, false],
-	[rm_basic, true, false, false, false],
-	[rm_basic, true, true, true, false],
+	[rm_lab_11, true, true, true, false],
+	[rm_lab_12, false, true, false, false],
+	[rm_lab_13, false, false, true, false],
+	[rm_lab_14, false, false, false, true],
+	[rm_lab_15, true, false, false, false],
 ]
 #endregion
 
