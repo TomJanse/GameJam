@@ -41,6 +41,8 @@ enum DIRECTION {
 global.current_room = -1
 // TODO: Change tile indexes to correct values when tile map is complete
 global.collision_tile_index = 89
+global.floor_tile_index = 201
+global.above_door_up_index = 331
 global.door_index = {
 	door_left: [189, 233, 277, 321],
 	door_right: [190, 234, 278, 322],
@@ -51,10 +53,6 @@ global.door_index = {
 	door_down: [323, 324, 325, 326]
 }
 global.spawn_tile_index = 1
-global.door_left_tile_index = 2
-global.door_right_tile_index = 2
-global.door_up_tile_index = 2
-global.door_down_tile_index = 2
 global.rooms = [
 	[rm_lab_01, false, true, true, true],
 	[rm_lab_02, true, true, true, true],
@@ -209,11 +207,23 @@ function change_door_state(_room_data, _open) {
 			// Remove collision
 			tilemap_set(global.tiles_map_collision, 0, _tile[0], _tile[1])
 			
+			// Remove door visuals
+			tilemap_set(global.tiles_map_decorative, global.floor_tile_index, _tile[0], _tile[1])
+			
 			// Remove collision on layer of wall above door up
 			if(array_contains(global.door_index.door_up_top, _tile[2])) {
 				tilemap_set(global.tiles_map_collision, 0 , _tile[0], _tile[1] - 1)	
+				tilemap_set(global.tiles_map_decorative, global.floor_tile_index, _tile[0], _tile[1] - 1)
 			}
 		} else {
+			// Set door visuals
+			tilemap_set(global.tiles_map_decorative, _tile[2], _tile[0], _tile[1])
+			
+			// Set visuals for above door
+			if(array_contains(global.door_index.door_up_top, _tile[2])) {
+				tilemap_set(global.tiles_map_decorative, global.above_door_up_index, _tile[0], _tile[1] - 1)
+			}
+			
 			// Skip bottom layer of door up
 			if (array_contains(global.door_index.door_up, _tile[2]) && 
 				!array_contains(global.door_index.door_up_collision_only, _tile[2])) continue
