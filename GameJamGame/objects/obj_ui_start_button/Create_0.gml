@@ -46,7 +46,7 @@ function start_game()
 			
 			// Actually start game by starting rm_floor script.
 			// TODO: CHANGE TO TUTORIAL!
-			fade(rm_floor);
+			fade(rm_tutorial);
 			started = true;
 		}
 	}
